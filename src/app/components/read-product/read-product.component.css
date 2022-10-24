@@ -1,0 +1,26 @@
+table {
+   width: 100%;
+}
+
+.idColumn {
+   text-align: end;
+   padding-right: 15px;
+   width: 50px;
+}
+
+.valueColumn {
+   text-align: end;
+   width: 150px;
+   padding-right: 15px;
+}
+
+.actionColumn {
+   text-align: end;
+   width: 75px;
+   padding-right: 15px;
+}
+
+.table-button {
+   color: #ED467F;
+   margin: 0 5px;
+}

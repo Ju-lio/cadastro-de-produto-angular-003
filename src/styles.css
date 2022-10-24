@@ -4,5 +4,13 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 body {
-   /* background-color: #212121; */
+   background: #303030;
+}
+
+.margin-header {
+   margin-top: 40px;
+}
+
+.margin-footer {
+   margin-bottom: 40px;
 }
