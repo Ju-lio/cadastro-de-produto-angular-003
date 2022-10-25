@@ -1,0 +1,43 @@
+<mat-card>
+   <mat-card-title>Alterar produto</mat-card-title>
+   <form class="form">
+      <mat-form-field color="accent" class="inputSmall">
+         <input
+            [(ngModel)]="product.id"
+            name="id"
+            matInput
+            disabled="true"
+            placeholder="ID" />
+      </mat-form-field>
+      <mat-form-field color="accent" class="inputMiddle">
+         <input
+            [(ngModel)]="product.name"
+            name="name"
+            matInput
+            placeholder="Descrição" />
+      </mat-form-field>
+      <mat-form-field color="accent" class="inputSmall">
+         <input
+            [(ngModel)]="product.price"
+            name="price"
+            matInput
+            placeholder="Preço (R$)" />
+      </mat-form-field>
+   </form>
+   <button
+      class="button"
+      mat-raised-button
+      color="accent"
+      disabled="{{ inTransaction }}"
+      (click)="updateProduct()">
+      Gravar
+   </button>
+   <button
+      class="button"
+      mat-raised-button
+      color="warn"
+      disabled="{{ inTransaction }}"
+      (click)="back()">
+      Cancelar
+   </button>
+</mat-card>

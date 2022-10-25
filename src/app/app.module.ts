@@ -23,9 +23,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReadProductComponent } from './components/read-product/read-product.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
 
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { UpdateProductComponent } from './components/update-product/update-product.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 registerLocaleData(localePt);
 
@@ -39,6 +42,7 @@ registerLocaleData(localePt);
       ProductsComponent,
       CreateProductComponent,
       ReadProductComponent,
+      UpdateProductComponent,
    ],
    imports: [
       MatToolbarModule,
@@ -56,6 +60,8 @@ registerLocaleData(localePt);
       MatFormFieldModule,
       MatInputModule,
       MatTableModule,
+      MatMenuModule,
+      MatDialogModule,
    ],
    providers: [
       {

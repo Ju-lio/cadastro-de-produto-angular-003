@@ -24,7 +24,7 @@ export class CreateProductComponent {
    ) {}
 
    back() {
-      this.router.navigate(['/products']);
+      this.router.navigate(['/']);
    }
 
    createProduct() {
@@ -33,7 +33,6 @@ export class CreateProductComponent {
          this.productsService.create(this.product).subscribe(() => {
             this.routines.atention('Produto criado com sucesso!', 'Fechar');
             this.inTransaction = false;
-            // this.back();
          });
       }, 3000);
    }
