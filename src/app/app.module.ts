@@ -29,6 +29,7 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 registerLocaleData(localePt);
 
@@ -43,6 +44,7 @@ registerLocaleData(localePt);
       CreateProductComponent,
       ReadProductComponent,
       UpdateProductComponent,
+      ProductFormComponent,
    ],
    imports: [
       MatToolbarModule,

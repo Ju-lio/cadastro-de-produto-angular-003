@@ -8,7 +8,7 @@ export class RoutinesService {
    constructor(private snackBar: MatSnackBar) {}
 
    atention(message: string, action: string) {
-      this.snackBar.open(message, action, {
+      this.snackBar.open(message, 'Fechar', {
          duration: 3000,
          horizontalPosition: 'right',
          verticalPosition: 'top',

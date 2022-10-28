@@ -29,12 +29,12 @@
    <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td class="actionColumn" mat-cell *matCellDef="let element">
-         <a routerLink="update/{{ element.id }}">
+         <a routerLink="State.UPDATE/{{ element.id }}">
             <i class="material-icons table-button">
                edit
             </i>
          </a>
-         <a (click)="deleteConfirm(element.id)">
+         <a routerLink="State.DELETE/{{ element.id }}">
             <i class="material-icons table-button">
                delete
             </i>

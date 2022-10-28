@@ -10,17 +10,9 @@
             <i class="material-icons"> home </i>
             Início
          </a>
-         <a>
-            <button class="menu-button" mat-button [matMenuTriggerFor]="menu">
-               <i class="material-icons">
-                  storefront
-               </i>
-               Produto
-            </button>
-            <mat-menu #menu="matMenu">
-               <button class="button-item" mat-menu-item routerLink="/products/create">Novo produto</button>
-               <button class="button-item" mat-menu-item routerLink="/products">Consultar produtos</button>
-            </mat-menu>
+         <a  mat-list-item routerLink="/products">
+            <i class="material-icons"> storefront </i>
+            Produto
          </a>
       </mat-nav-list>
    </mat-sidenav>

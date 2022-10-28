@@ -26,14 +26,6 @@ export class ReadProductComponent implements OnInit {
          this.products = products;
       });
    }
-
-   deleteConfirm(id: string) {
-      const dialogRef = this.openDialog(MatDialogRef);
-
-      dialogRef.afterClosed().subscribe(() => {
-         this.productsService.delete(id);
-      });
-   }
 }
 
 export class DialogAnimationsExample {
