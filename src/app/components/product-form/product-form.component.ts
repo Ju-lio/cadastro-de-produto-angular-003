@@ -56,16 +56,12 @@ export class ProductFormComponent implements OnInit {
    }
 
    getState(): State {
-      const state = this.route.snapshot.paramMap.get('operation') ?? '';
-      if ((<any>Object).values(State).includes(state)) {
-         return State.BROWSE;
-      } else {
-         return State.UNDEFINED;
-      }
+      const state = this.route.snapshot.paramMap.get('operation');
+      return Object.values(State).includes(state) ? state : State.UNDEFINED;
    }
 
    ngOnInit(): void {
-      this.getState();
+      this.operation.[this.state].init();
    }
 
    back() {

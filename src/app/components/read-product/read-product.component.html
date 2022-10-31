@@ -26,18 +26,15 @@
    </ng-container>
 
    <!-- Ações Column -->
-   <ng-container matColumnDef="acoes">
+   <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td class="actionColumn" mat-cell *matCellDef="let element">
-         <a routerLink="State.UPDATE/{{ element.id }}">
-            <i class="material-icons table-button">
-               edit
-            </i>
+         <a routerLink="{{ state.UPDATE }}/{{ element.id }}">
+            <!-- @@JSC -->
+            <i class="material-icons table-button"> edit </i>
          </a>
-         <a routerLink="State.DELETE/{{ element.id }}">
-            <i class="material-icons table-button">
-               delete
-            </i>
+         <a routerLink="{{ state.DELETE }}/{{ element.id }}">
+            <i class="material-icons table-button"> delete </i>
          </a>
       </td>
    </ng-container>

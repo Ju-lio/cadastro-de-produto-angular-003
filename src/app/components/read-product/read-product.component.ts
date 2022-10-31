@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products/products.service';
-import {
-   MatDialog,
-   MatDialogRef,
-   MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { State } from 'src/app/enums/state.enum';
 
 @Component({
    selector: 'app-read-product',
@@ -14,12 +11,10 @@ import {
 })
 export class ReadProductComponent implements OnInit {
    products: Product[] = [];
-   displayedColumns = ['id', 'name', 'price', 'acoes'];
+   displayedColumns = ['id', 'name', 'price', 'actions'];
+   readonly state = State;
 
-   constructor(
-      private dialog: MatDialog,
-      private productsService: ProductsService
-   ) {}
+   constructor(private productsService: ProductsService) {}
 
    ngOnInit(): void {
       this.productsService.read().subscribe(products => {
