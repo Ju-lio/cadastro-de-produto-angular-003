@@ -27,15 +27,18 @@
 
    <!-- Ações Column -->
    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <th class="centralize-text" mat-header-cell *matHeaderCellDef>Ações</th>
       <td class="actionColumn" mat-cell *matCellDef="let element">
-         <a routerLink="{{ state.UPDATE }}/{{ element.id }}">
-            <!-- @@JSC -->
-            <i class="material-icons table-button"> edit </i>
+         <a title="Consultar produto" routerLink="{{ getRouterByState(state.BROWSE, element.id) }}">
+            <i class="material-icons table-button-browse"> visibility icon </i>
          </a>
-         <a routerLink="{{ state.DELETE }}/{{ element.id }}">
-            <i class="material-icons table-button"> delete </i>
+         <a title="Editar produto" routerLink="{{ getRouterByState(state.UPDATE, element.id) }}">
+            <i class="material-icons table-button-update"> edit </i>
          </a>
+         <a title="Deletar produto" routerLink="{{ getRouterByState(state.DELETE, element.id) }}">
+            <i class="material-icons table-button-delete"> delete </i>
+         </a>
+         
       </td>
    </ng-container>
 

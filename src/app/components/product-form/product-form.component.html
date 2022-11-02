@@ -1,42 +1,47 @@
 <mat-card>
-   <mat-card-title>Novo produto</mat-card-title>
+   <mat-card-title>{{ title }}</mat-card-title>
    <form class="form">
-      <mat-form-field *ngIf="showId" color="accent" class="inputSmall">
+      <mat-form-field *ngIf="inputId.visible" color="accent" class="inputSmall">
          <input
             [(ngModel)]="product.id"
             name="id"
             matInput
-            placeholder="ID" />
+            placeholder="ID"
+            disabled="true" />
       </mat-form-field>
-      <mat-form-field color="accent" class="inputMiddle">
+      <mat-form-field *ngIf="inputName.visible" color="accent" class="inputMiddle">
          <input
             [(ngModel)]="product.name"
             name="name"
             matInput
-            placeholder="Descrição" />
+            placeholder="Descrição"
+            disabled="{{ inputName.disabled }}" />
       </mat-form-field>
-      <mat-form-field color="accent" class="inputSmall">
+      <mat-form-field *ngIf="inputPrice.visible" color="accent" class="inputSmall">
          <input
             [(ngModel)]="product.price"
             name="price"
             matInput
-            placeholder="Preço (R$)" />
+            placeholder="Preço (R$)"
+            disabled="{{ inputPrice.disabled}}" />
       </mat-form-field>
    </form>
    <button
+      *ngIf="buttonConfirm.visible"
       class="button"
       mat-raised-button
-      color="accent"
-      disabled="{{inTransaction}}"
+      color="{{ buttonConfirm.color }}"
+      disabled="{{ buttonConfirm.disabled}}"
       (click)="submit()">
-      Gravar
+      {{ buttonConfirm.caption }}
    </button>
    <button
+   *ngIf="buttonCancel.visible"
       class="button"
       mat-raised-button
-      color="warn"
-      disabled="{{inTransaction}}"
+      color="{{ buttonCancel.color }}"
+      disabled="{{ buttonCancel.disabled }}"
       (click)="back()">
-      Cancelar
+      {{ buttonCancel.caption }}
    </button>
 </mat-card>

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { State } from 'src/app/enums/state.enum';
 import { Product } from 'src/app/models/product.model';
 
 @Injectable({
@@ -20,11 +19,6 @@ export class ProductsService {
    update(product: Product): Observable<Product> {
       const url = `${this.baseUrl}/${product.id}`;
       return this.http.put<Product>(url, product);
-   }
-
-   browse(product: Product): Observable<Product> {
-      const url = `${this.baseUrl}/${product.id}`;
-      return this.http.get<Product>(url);
    }
 
    read(): Observable<Product[]> {
@@ -46,26 +40,27 @@ export class ProductsService {
       return this.http.delete<Product>(url);
    }
 
-   atention(state: string) {
-      let message = '';
-      switch (state) {
-         case State.CREATE:
-            message = 'Produto criado com sucesso!';
-            break;
-         case State.UPDATE:
-            message = 'Produto alterado com sucesso!';
-            break;
-         case State.DELETE:
-            message = 'Produto excluido com sucesso!';
-            break;
-         default:
-            message = 'Procedimento executado com sucesso!';
-            break;
-      }
+   messageSnackBar(message: string) {
       this.snackBar.open(message, 'Fechar', {
          duration: 3000,
          horizontalPosition: 'right',
          verticalPosition: 'top',
       });
+   }
+
+   successMessageCreate() {
+      this.messageSnackBar('Produto criado com sucesso!');
+   }
+
+   successMessageUpdate() {
+      this.messageSnackBar('Produto alterado com sucesso!');
+   }
+
+   successMessageDelete() {
+      this.messageSnackBar('Produto excluido com sucesso!');
+   }
+
+   successMessageUndefined() {
+      this.messageSnackBar('Procedimento executado com sucesso!');
    }
 }

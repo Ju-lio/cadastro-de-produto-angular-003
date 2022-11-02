@@ -1,7 +1,7 @@
 export enum State {
-   CREATE = <any>'create',
-   UPDATE = <any>'update',
-   BROWSE = <any>'browse',
-   DELETE = <any>'delete',
-   UNDEFINED = <any>'',
+   CREATE = 'create',
+   UPDATE = 'update',
+   BROWSE = 'browse',
+   DELETE = 'delete',
+   UNDEFINED = 'state undefined',
 }

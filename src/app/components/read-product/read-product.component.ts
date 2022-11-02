@@ -21,23 +21,8 @@ export class ReadProductComponent implements OnInit {
          this.products = products;
       });
    }
-}
 
-export class DialogAnimationsExample {
-   constructor(public dialog: MatDialog) {}
-
-   openDialog(
-      enterAnimationDuration: string,
-      exitAnimationDuration: string
-   ): void {
-      this.dialog.open(DialogAnimationsExampleDialog, {
-         width: '250px',
-         enterAnimationDuration,
-         exitAnimationDuration,
-      });
+   getRouterByState(state: State, id: number): string {
+      return `${state}/${id}`;
    }
-}
-
-export class DialogAnimationsExampleDialog {
-   constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>) {}
 }
