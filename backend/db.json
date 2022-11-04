@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Caneca BIC Preta",
-      "price": "50.89"
+      "price": 90.74
     },
     {
       "id": 2,
@@ -26,21 +26,6 @@
       "id": 5
     },
     {
-      "name": "Produto produtivo",
-      "price": "18.88",
-      "id": 6
-    },
-    {
-      "name": "Produto produtivo",
-      "price": "18.88",
-      "id": 7
-    },
-    {
-      "name": "Produto produtivo",
-      "price": "010",
-      "id": 8
-    },
-    {
       "name": "Pó de pirilimpimpim 25g ",
       "price": "529.99",
       "id": 9
@@ -57,7 +42,7 @@
     },
     {
       "name": "Siricutico da bruxa (enlatado) 1kg",
-      "price": "6.99",
+      "price": 66.77,
       "id": 12
     }
   ]

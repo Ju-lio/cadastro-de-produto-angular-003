@@ -2,12 +2,7 @@
    <mat-card-title>{{ title }}</mat-card-title>
    <form class="form">
       <mat-form-field *ngIf="inputId.visible" color="accent" class="inputSmall">
-         <input
-            [(ngModel)]="product.id"
-            name="id"
-            matInput
-            placeholder="ID"
-            disabled="true" />
+         <input [(ngModel)]="product.id" name="id" matInput placeholder="ID" disabled="true" />
       </mat-form-field>
       <mat-form-field *ngIf="inputName.visible" color="accent" class="inputMiddle">
          <input
@@ -22,8 +17,10 @@
             [(ngModel)]="product.price"
             name="price"
             matInput
-            placeholder="Preço (R$)"
-            disabled="{{ inputPrice.disabled}}" />
+            placeholder="Preço"
+            disabled="{{ inputPrice.disabled }}"
+            currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
       </mat-form-field>
    </form>
    <button
@@ -31,12 +28,12 @@
       class="button"
       mat-raised-button
       color="{{ buttonConfirm.color }}"
-      disabled="{{ buttonConfirm.disabled}}"
+      disabled="{{ buttonConfirm.disabled }}"
       (click)="submit()">
       {{ buttonConfirm.caption }}
    </button>
    <button
-   *ngIf="buttonCancel.visible"
+      *ngIf="buttonCancel.visible"
       class="button"
       mat-raised-button
       color="{{ buttonCancel.color }}"

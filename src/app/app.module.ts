@@ -30,6 +30,9 @@ import { registerLocaleData } from '@angular/common';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { ProductTabsComponent } from './components/product-tabs/product-tabs.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 registerLocaleData(localePt);
 
@@ -45,6 +48,7 @@ registerLocaleData(localePt);
       ReadProductComponent,
       UpdateProductComponent,
       ProductFormComponent,
+      ProductTabsComponent,
    ],
    imports: [
       MatToolbarModule,
@@ -64,6 +68,8 @@ registerLocaleData(localePt);
       MatTableModule,
       MatMenuModule,
       MatDialogModule,
+      CurrencyMaskModule,
+      MatTabsModule,
    ],
    providers: [
       {
