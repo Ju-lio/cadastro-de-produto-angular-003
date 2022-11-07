@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductFormComponent } from './components/product-form/product-form.component';
 import { HomeComponent } from './modules/home/home.component';
-import { ProductsComponent } from './modules/products/products.component';
+import { ProductComponent } from './modules/product/product.component';
+import { ProductFormComponent } from './components/product/product-form/product-form.component';
+import { GroupProductFormComponent } from './components/group-product/group-product-form/group-product-form.component';
+import { GroupProductComponent } from './modules/group-product/group-product.component';
 
 const routes: Routes = [
    {
@@ -10,16 +12,24 @@ const routes: Routes = [
       component: HomeComponent,
    },
    {
-      path: 'products',
-      component: ProductsComponent,
+      path: 'product',
+      component: ProductComponent,
    },
    {
-      path: 'products/create',
+      path: 'product/create',
       component: ProductFormComponent,
    },
    {
-      path: 'products/:operation/:id',
+      path: 'product/:operation/:id',
       component: ProductFormComponent,
+   },
+   {
+      path: 'group-product',
+      component: GroupProductComponent,
+   },
+   {
+      path: 'group-product/:operation/:id',
+      component: GroupProductFormComponent,
    },
 ];
 

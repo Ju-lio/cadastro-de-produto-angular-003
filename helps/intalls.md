@@ -1,0 +1,1 @@
+    npm install ng2-currency-mask --save

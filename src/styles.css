@@ -7,10 +7,30 @@ body {
    background: #303030;
 }
 
+/* FORM STYLES */
 .margin-header {
    margin-top: 40px;
 }
 
 .margin-footer {
    margin-bottom: 40px;
+}
+
+.form {
+   display: flex;
+   flex-direction: column;
+}
+
+.form-button {
+   margin-right: 10px;
+}
+
+.form-input-middle {
+   width: 500px;
+   padding-right: 15px;
+}
+
+.form-input-small {
+   width: 150px;
+   padding-right: 15px;
 }

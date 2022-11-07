@@ -1,0 +1,34 @@
+<mat-card>
+   <mat-card-title>{{ title }}</mat-card-title>
+   <form class="form">
+      <mat-form-field *ngIf="inputId.visible" color="accent" class="form-input-small">
+         <input [(ngModel)]="groupProduct.id" name="id" matInput placeholder="ID" disabled="true" />
+      </mat-form-field>
+      <mat-form-field *ngIf="inputName.visible" color="accent" class="form-input-middle">
+         <input
+            [(ngModel)]="groupProduct.name"
+            name="name"
+            matInput
+            placeholder="Descrição"
+            disabled="{{ inputName.disabled }}" />
+      </mat-form-field>
+   </form>
+   <button
+      *ngIf="buttonConfirm.visible"
+      class="form-button"
+      mat-raised-button
+      color="{{ buttonConfirm.color }}"
+      disabled="{{ buttonConfirm.disabled }}"
+      (click)="submit()">
+      {{ buttonConfirm.caption }}
+   </button>
+   <button
+      *ngIf="buttonCancel.visible"
+      class="form-button"
+      mat-raised-button
+      color="{{ buttonCancel.color }}"
+      disabled="{{ buttonCancel.disabled }}"
+      (click)="back()">
+      {{ buttonCancel.caption }}
+   </button>
+</mat-card>
