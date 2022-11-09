@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, Subject, takeUntil } from 'rxjs';
 import { State } from 'src/app/enums/state.enum';
 import { Button } from 'src/app/models/button.model';
 import { GroupProduct } from 'src/app/models/group-product.model';
@@ -23,6 +23,7 @@ export type Operation = {
 export class GroupProductFormComponent implements OnInit {
    state!: State;
    title!: string;
+   destroy$: Subject<unknown> = new Subject();
 
    inputId: Input = {
       disabled: false,
@@ -88,9 +89,12 @@ export class GroupProductFormComponent implements OnInit {
 
    getProduct() {
       const id = this.route.snapshot.paramMap.get('id');
-      this.groupProductsService.readById(id ? id : '').subscribe(groupProduct => {
-         this.groupProduct = groupProduct;
-      });
+      this.groupProductsService
+         .readById(id ? id : '')
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(groupProduct => {
+            this.groupProduct = groupProduct;
+         });
    }
 
    setState(state: State) {
@@ -107,9 +111,11 @@ export class GroupProductFormComponent implements OnInit {
 
    ngOnInit(): void {
       const state = this.route.snapshot.paramMap.get('operation');
-      this.initialize(state ?? State.UNDEFINED).subscribe(() => {
-         this.operation[this.state].init();
-      });
+      this.initialize(state ?? State.UNDEFINED)
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(() => {
+            this.operation[this.state].init();
+         });
    }
 
    back() {
@@ -118,10 +124,13 @@ export class GroupProductFormComponent implements OnInit {
 
    submit() {
       this.disableAll(true);
-      this.operation[this.state].submit(this.groupProduct).subscribe(() => {
-         this.operation[this.state].successMessage();
-         this.back();
-      });
+      this.operation[this.state]
+         .submit(this.groupProduct)
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(() => {
+            this.operation[this.state].successMessage();
+            this.back();
+         });
    }
 
    disableInputs(disable: boolean) {
@@ -136,9 +145,12 @@ export class GroupProductFormComponent implements OnInit {
    }
 
    setProduct(id: string) {
-      this.groupProductsService.readById(id).subscribe(groupProduct => {
-         this.groupProduct = groupProduct;
-      });
+      this.groupProductsService
+         .readById(id)
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(groupProduct => {
+            this.groupProduct = groupProduct;
+         });
    }
 
    initCreate() {

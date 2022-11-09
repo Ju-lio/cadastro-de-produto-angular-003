@@ -4,6 +4,7 @@ import { State } from 'src/app/enums/state.enum';
 import { ProductService } from 'src/app/services/product.service';
 import { GroupProductService } from 'src/app/services/group-product.service';
 import { GroupProduct } from 'src/app/models/group-product.model';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
    selector: 'app-product-list',
@@ -15,6 +16,7 @@ export class ProductListComponent implements OnInit {
    groupProducts: GroupProduct[] = [];
    groupProductSelected?: number;
    displayedColumns = ['id', 'name', 'price', 'actions'];
+   destroy$: Subject<unknown> = new Subject();
    readonly state = State;
 
    constructor(
@@ -23,23 +25,32 @@ export class ProductListComponent implements OnInit {
    ) {}
 
    ngOnInit(): void {
-      this.productsService.getAll().subscribe(product => {
-         this.products = product;
-      });
-      this.groupProductsService.getAll().subscribe(groupProduct => {
-         this.groupProducts = groupProduct;
-      });
+      this.productsService
+         .getAll()
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(product => {
+            this.products = product;
+         });
+      this.groupProductsService
+         .getAll()
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(groupProduct => {
+            this.groupProducts = groupProduct;
+         });
    }
 
    process() {
-      this.productsService.getAll().subscribe(products => {
-         this.products = products;
-         if (this.groupProductSelected) {
-            this.products = this.products.filter(
-               products => products.group == this.groupProductSelected
-            );
-         }
-      });
+      this.productsService
+         .getAll()
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(products => {
+            this.products = products;
+            if (this.groupProductSelected) {
+               this.products = this.products.filter(
+                  products => products.group == this.groupProductSelected
+               );
+            }
+         });
    }
 
    getRouterByState(state: State, id: number): string {

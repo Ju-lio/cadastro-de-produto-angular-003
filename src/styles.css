@@ -7,7 +7,16 @@ body {
    background: #303030;
 }
 
+* {
+   outline: 0;  
+}
+
+*::selection {
+   background-color: #C2185B;
+}
+
 /* FORM STYLES */
+
 .margin-header {
    margin-top: 40px;
 }
@@ -22,7 +31,7 @@ body {
 }
 
 .form-button {
-   margin-right: 10px;
+   margin-right: 10px !important;
 }
 
 .form-input-middle {
@@ -33,4 +42,73 @@ body {
 .form-input-small {
    width: 150px;
    padding-right: 15px;
+}
+
+/* LIST STYLE */
+
+.filters {
+   display: flex;
+   margin: 15px 0;
+}
+
+ng-container td a i {
+   margin-right: 15px;
+}
+
+table {
+   width: 100%;
+}
+
+.table-column-id {
+   text-align: end;
+   padding-right: 15px;
+   width: 50px;
+}
+
+.table-column-value {
+   text-align: end;
+   padding-right: 15px;
+}
+
+.table-column-actions {
+   text-align: center;
+   padding-right: 15px;
+}
+
+.centralize-text {
+   display: flex;
+   height: 55px;
+   justify-content: center;
+   align-items: center;
+}
+
+.table-button-update,
+.table-button-browse,
+.table-button-delete {
+   margin-left: 5px;
+   width: 25px;
+}
+
+.table-button-update {
+   color: #CCA700;
+}
+
+.table-button-browse {
+   color: #4E8DF3;
+}
+
+.table-button-delete {
+   color: #ED467F;
+}
+
+.table-button-update:hover {
+   color: #aa8f15;
+}
+
+.table-button-browse:hover {
+   color: #41649e;
+}
+
+.table-button-delete:hover {
+   color: #ac2c57;
 }

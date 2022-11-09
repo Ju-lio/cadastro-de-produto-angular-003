@@ -1,12 +1,12 @@
 <table
    mat-table
    [dataSource]="groupProduct"
-   class="mat-elevation-z4 margin-footer"
+   class="mat-elevation-z4 margin-footer table-list"
    aria-label="Cadastro de grupo de produtos">
    <!-- ID Column -->
    <ng-container matColumnDef="id">
-      <th class="idColumn" mat-header-cell *matHeaderCellDef>ID</th>
-      <td class="idColumn" mat-cell *matCellDef="let element">
+      <th class="table-id-column" mat-header-cell *matHeaderCellDef>ID</th>
+      <td class="table-id-column" mat-cell *matCellDef="let element">
          {{ element.id }}
       </td>
    </ng-container>
@@ -20,7 +20,7 @@
    <!-- Ações Column -->
    <ng-container matColumnDef="actions">
       <th class="centralize-text" mat-header-cell *matHeaderCellDef>Ações</th>
-      <td class="actionColumn" mat-cell *matCellDef="let element">
+      <td class="table-column-actions" mat-cell *matCellDef="let element">
          <a title="Consultar produto" routerLink="{{ getRouterByState(state.BROWSE, element.id) }}">
             <i class="material-icons table-button-browse"> visibility icon </i>
          </a>

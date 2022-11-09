@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, Subject, takeUntil } from 'rxjs';
 import { State } from 'src/app/enums/state.enum';
 import { Button } from 'src/app/models/button.model';
 import { GroupProduct } from 'src/app/models/group-product.model';
@@ -18,7 +18,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductFormComponent implements OnInit {
    state!: State;
    title!: string;
-
+   destroy$: Subject<unknown> = new Subject();
    groupProducts: GroupProduct[] = [];
 
    inputId: Input = {
@@ -98,19 +98,27 @@ export class ProductFormComponent implements OnInit {
 
    ngOnInit(): void {
       const state = this.route.snapshot.paramMap.get('operation');
-      this.initialize(state ?? State.UNDEFINED).subscribe(() => {
-         this.groupProductsService.getAll().subscribe(groupProduct => {
-            this.groupProducts = groupProduct;
+      this.initialize(state ?? State.UNDEFINED)
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(() => {
+            this.groupProductsService
+               .getAll()
+               .pipe(takeUntil(this.destroy$))
+               .subscribe(groupProduct => {
+                  this.groupProducts = groupProduct;
+               });
+            this.operation[this.state].init();
          });
-         this.operation[this.state].init();
-      });
    }
 
    getProduct() {
       const id = this.route.snapshot.paramMap.get('id');
-      this.productsService.readById(id ? id : '').subscribe(product => {
-         this.product = product;
-      });
+      this.productsService
+         .readById(id ? id : '')
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(product => {
+            this.product = product;
+         });
    }
 
    setState(state: State) {
@@ -131,10 +139,13 @@ export class ProductFormComponent implements OnInit {
 
    submit() {
       this.disableAll(true);
-      this.operation[this.state].submit(this.product).subscribe(() => {
-         this.operation[this.state].successMessage();
-         this.back();
-      });
+      this.operation[this.state]
+         .submit(this.product)
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(() => {
+            this.operation[this.state].successMessage();
+            this.back();
+         });
    }
 
    disableInputs(disable: boolean) {
@@ -151,9 +162,12 @@ export class ProductFormComponent implements OnInit {
    }
 
    setProduct(id: string) {
-      this.productsService.readById(id).subscribe(product => {
-         this.product = product;
-      });
+      this.productsService
+         .readById(id)
+         .pipe(takeUntil(this.destroy$))
+         .subscribe(product => {
+            this.product = product;
+         });
    }
 
    initCreate() {

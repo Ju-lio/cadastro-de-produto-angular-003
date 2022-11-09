@@ -15,6 +15,10 @@
     {
       "name": "Vestuário",
       "id": 5
+    },
+    {
+      "name": "Eletrônicos",
+      "id": 6
     }
   ],
   "product": [
