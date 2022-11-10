@@ -49,15 +49,15 @@ export class GroupProductService {
    }
 
    successMessageCreate() {
-      this.messageSnackBar('Produto criado com sucesso!');
+      this.messageSnackBar('Grupo de produto criado com sucesso!');
    }
 
    successMessageUpdate() {
-      this.messageSnackBar('Produto alterado com sucesso!');
+      this.messageSnackBar('Grupo de produto alterado com sucesso!');
    }
 
    successMessageDelete() {
-      this.messageSnackBar('Produto excluido com sucesso!');
+      this.messageSnackBar('Grupo de produto excluido com sucesso!');
    }
 
    successMessageUndefined() {

@@ -61,8 +61,7 @@ table {
 
 .table-column-id {
    text-align: end;
-   padding-right: 15px;
-   width: 50px;
+   padding-right: 15px !important;
 }
 
 .table-column-value {
@@ -111,4 +110,8 @@ table {
 
 .table-button-delete:hover {
    color: #ac2c57;
+}
+
+.material-icons {
+   margin-right: 15px;
 }
