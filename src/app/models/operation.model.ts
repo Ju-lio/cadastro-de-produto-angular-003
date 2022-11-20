@@ -3,9 +3,9 @@ import { Product } from './product.model';
 import { Observable } from 'rxjs';
 
 export type Operation = {
-   [key in State]: {
-      submit: (product: Product) => Observable<Product>;
-      init: () => void;
-      successMessage: () => void;
-   };
+  [key in State]: {
+    submit: (product: Product) => Observable<Product>;
+    init: () => void;
+    successMessage: () => void;
+  };
 };

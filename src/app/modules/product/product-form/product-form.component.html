@@ -1,0 +1,52 @@
+<mat-card>
+   <mat-card-title>{{ title }}</mat-card-title>
+   <form class="form">
+      <mat-form-field *ngIf="inputId.visible" color="accent" class="form-input-small">
+         <input [(ngModel)]="product.id" name="id" matInput placeholder="ID" disabled="true" />
+      </mat-form-field>
+      <mat-form-field *ngIf="inputName.visible" color="accent" class="form-input-middle">
+         <input
+            [(ngModel)]="product.name"
+            name="name"
+            matInput
+            placeholder="Descrição"
+            disabled="{{ inputName.disabled }}" />
+      </mat-form-field>
+      <mat-form-field *ngIf="inputPrice.visible" color="accent" class="form-input-small">
+         <input
+            [(ngModel)]="product.price"
+            name="price"
+            matInput
+            placeholder="Preço"
+            disabled="{{ inputPrice.disabled }}"
+            currencyMask
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-input-middle">
+         <mat-label>Grupo</mat-label>
+         <mat-select disabled="{{ inputGroup.disabled }}" [(value)]="product.group">
+            <mat-option *ngFor="let groupProduct of groupProducts" [value]="groupProduct.id">
+               {{ groupProduct.name }}
+            </mat-option>
+         </mat-select>
+      </mat-form-field>
+   </form>
+   <button
+      *ngIf="buttonConfirm.visible"
+      class="form-button"
+      mat-raised-button
+      color="{{ buttonConfirm.color }}"
+      disabled="{{ buttonConfirm.disabled }}"
+      (click)="submit()">
+      {{ buttonConfirm.caption }}
+   </button>
+   <button
+      *ngIf="buttonCancel.visible"
+      class="form-button"
+      mat-raised-button
+      color="{{ buttonCancel.color }}"
+      disabled="{{ buttonCancel.disabled }}"
+      (click)="cancel()">
+      {{ buttonCancel.caption }}
+   </button>
+</mat-card>

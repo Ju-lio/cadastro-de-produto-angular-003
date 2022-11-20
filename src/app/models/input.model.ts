@@ -1,4 +1,4 @@
 export interface Input {
-   disabled: boolean;
-   visible: boolean;
+  disabled: boolean;
+  visible: boolean;
 }

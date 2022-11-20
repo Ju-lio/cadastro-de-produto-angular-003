@@ -19,10 +19,6 @@
     {
       "name": "Eletrônicos",
       "id": 6
-    },
-    {
-      "name": "teste",
-      "id": 7
     }
   ],
   "product": [
@@ -52,7 +48,7 @@
     },
     {
       "name": "Notebook Lenovo Ideapad 320-80YH0002BR - Prata - Intel Core i7-7500U - RAM 8GB - HD 1TB - Tela 15.6",
-      "price": 125.98,
+      "price": 3125.98,
       "id": 5,
       "group": 2
     },
@@ -87,7 +83,7 @@
       "group": 4
     },
     {
-      "name": "Camiseta de algodão - Preto",
+      "name": "Camiseta de algodão - Preto - Tamanho P",
       "price": 37.9,
       "group": 5,
       "id": 14
