@@ -16,11 +16,11 @@ const routes: Routes = [
     component: ProductComponent,
   },
   {
-    path: 'product/create',
+    path: 'product/new',
     component: ProductFormComponent,
   },
   {
-    path: 'product/:operation/:id',
+    path: 'product/:id',
     component: ProductFormComponent,
   },
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
     component: GroupProductComponent,
   },
   {
-    path: 'group-product/:operation/:id',
+    path: 'group-product/:id',
     component: GroupProductFormComponent,
   },
 ];

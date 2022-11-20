@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { State } from 'src/app/enums/state.enum';
+import { Action } from 'src/app/enums/action.enum';
 import { GroupProduct } from 'src/app/models/group-product.model';
 import { GroupProductService } from 'src/app/services/group-product.service';
 
@@ -13,7 +13,7 @@ export class GroupProductListComponent implements OnInit {
   groupProduct: GroupProduct[] = [];
   displayedColumns = ['id', 'name', 'actions'];
   destroy$: Subject<unknown> = new Subject();
-  readonly state = State;
+  readonly action = Action;
 
   constructor(private groupProductsService: GroupProductService) {}
 

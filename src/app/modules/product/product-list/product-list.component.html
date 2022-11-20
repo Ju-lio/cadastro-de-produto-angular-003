@@ -45,13 +45,13 @@
    <ng-container matColumnDef="actions">
       <th class="centralize-text" mat-header-cell *matHeaderCellDef>Ações</th>
       <td class="table-column-actions" mat-cell *matCellDef="let element">
-         <a title="Consultar produto" [routerLink]="['browse', element.id]">
+         <a title="Consultar produto" [routerLink]="[element.id]" [queryParams]="{action: action.VIEW}">
             <i class="material-icons table-button-browse"> visibility icon </i>
          </a>
-         <a title="Editar produto" [routerLink]="['update', element.id]">
+         <a title="Editar produto" [routerLink]="[element.id]" [queryParams]="{action: action.EDIT}">
             <i class="material-icons table-button-update"> edit </i>
          </a>
-         <a title="Deletar produto" [routerLink]="['delete', element.id]">
+         <a title="Deletar produto" [routerLink]="[element.id]" [queryParams]="{action: action.DELETE}">
             <i class="material-icons table-button-delete"> delete </i>
          </a>
       </td>

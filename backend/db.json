@@ -37,7 +37,7 @@
     {
       "id": 3,
       "name": "Papel Sulfite A4 Chamex 75g 500 folhas",
-      "price": 27.99,
+      "price": 28.99,
       "group": 1
     },
     {
@@ -87,6 +87,12 @@
       "price": 37.9,
       "group": 5,
       "id": 14
+    },
+    {
+      "name": "Cooktop 4 Bocas a Gás GLP Consul Vidro Temperado - Preto",
+      "price": 720,
+      "group": 4,
+      "id": 15
     }
   ]
 }

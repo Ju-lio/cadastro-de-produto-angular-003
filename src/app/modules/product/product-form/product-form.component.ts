@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable, Subject, takeUntil } from 'rxjs';
-import { State } from 'src/app/enums/state.enum';
+import { EMPTY, Subject, takeUntil } from 'rxjs';
+import { Action } from 'src/app/enums/action.enum';
 import { Button } from 'src/app/models/button.model';
 import { GroupProduct } from 'src/app/models/group-product.model';
 import { Input } from 'src/app/models/input.model';
@@ -16,7 +16,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-form.component.css'],
 })
 export class ProductFormComponent implements OnInit {
-  state!: State;
+  action!: Action;
   title!: string;
   destroy$: Subject<unknown> = new Subject();
   groupProducts: GroupProduct[] = [];
@@ -56,22 +56,22 @@ export class ProductFormComponent implements OnInit {
   };
 
   readonly operation: Operation = {
-    [State.CREATE]: {
+    [Action.NEW]: {
       submit: (product: Product) => this.productsService.create(product),
-      init: () => this.initCreate(),
-      successMessage: () => this.productsService.successMessageCreate(),
+      init: () => this.initNew(),
+      successMessage: () => this.productsService.successMessageNew(),
     },
-    [State.UPDATE]: {
-      submit: (product: Product) => this.productsService.update(product),
-      init: () => this.initUpdate(),
-      successMessage: () => this.productsService.successMessageUpdate(),
+    [Action.EDIT]: {
+      submit: (product: Product) => this.productsService.edit(product),
+      init: () => this.initEdit(),
+      successMessage: () => this.productsService.successMessageEdit(),
     },
-    [State.BROWSE]: {
+    [Action.VIEW]: {
       submit: (product: Product) => EMPTY,
-      init: () => this.initBrowse(),
+      init: () => this.initView(),
       successMessage: () => null,
     },
-    [State.DELETE]: {
+    [Action.DELETE]: {
       submit: (product: Product) => this.productsService.delete(product),
       init: () => this.initDelete(),
       successMessage: () => this.productsService.successMessageDelete(),
@@ -92,15 +92,15 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const state = this.route.snapshot.paramMap.get('operation');
-    this.initialize(state ?? State.CREATE);
+    const state = this.route.snapshot.queryParamMap.get('action');
+    this.initialize(state ?? Action.NEW);
     this.groupProductsService
       .getAll()
       .pipe(takeUntil(this.destroy$))
       .subscribe(groupProduct => {
         this.groupProducts = groupProduct;
       });
-    this.operation[this.state].init();
+    this.operation[this.action].init();
   }
 
   getProduct() {
@@ -113,16 +113,21 @@ export class ProductFormComponent implements OnInit {
       });
   }
 
-  setState(state: State) {
-    this.state = state;
+  setAction(action: Action) {
+    this.action = action;
   }
 
-  initialize(state: string) {
-    const indexOfState = Object.values(State).indexOf(
-      state as unknown as State
+  getAction(action: string): Action {
+    const indexOfAction = Object.values(Action).indexOf(
+      action as unknown as Action
     );
-    const key = Object.keys(State)[indexOfState];
-    this.setState(key ? State[key as keyof typeof State] : State.CREATE);
+    const key = Object.keys(Action)[indexOfAction];
+    return key ? Action[key as keyof typeof Action] : Action.NEW;
+  }
+
+  initialize(action: string) {
+    this.setAction(this.getAction(action));
+    this.operation[this.action].init();
   }
 
   cancel() {
@@ -137,11 +142,11 @@ export class ProductFormComponent implements OnInit {
 
   submit() {
     this.disableAll(true);
-    this.operation[this.state]
+    this.operation[this.action]
       .submit(this.product)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.operation[this.state].successMessage();
+        this.operation[this.action].successMessage();
         this.cancel();
         this.disableAll(false);
       });
@@ -169,19 +174,18 @@ export class ProductFormComponent implements OnInit {
       });
   }
 
-  initCreate() {
+  initNew() {
     this.title = 'Novo produto';
     this.inputId.visible = false;
-    this.buttonCancel.caption = 'Limpar';
   }
 
-  initUpdate() {
+  initEdit() {
     this.title = 'Editar produto';
     this.inputId.disabled = true;
     this.setProduct(this.route.snapshot.paramMap.get('id') ?? '');
   }
 
-  initBrowse() {
+  initView() {
     this.title = 'Consultar produto';
     this.buttonConfirm.visible = false;
     this.buttonCancel = {

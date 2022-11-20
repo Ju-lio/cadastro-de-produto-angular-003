@@ -16,18 +16,13 @@ export class GroupProductService {
     return this.http.post<GroupProduct>(this.baseUrl, groupProduct);
   }
 
-  update(groupProduct: GroupProduct): Observable<GroupProduct> {
+  edit(groupProduct: GroupProduct): Observable<GroupProduct> {
     const url = `${this.baseUrl}/${groupProduct.id}`;
     return this.http.put<GroupProduct>(url, groupProduct);
   }
 
   getAll(): Observable<GroupProduct[]> {
     return this.http.get<GroupProduct[]>(this.baseUrl);
-  }
-
-  undefined(groupProduct: GroupProduct) {
-    const url = `${this.baseUrl}/${groupProduct.id}`;
-    return this.http.get<GroupProduct>(url);
   }
 
   readById(id: string): Observable<GroupProduct> {
@@ -48,19 +43,15 @@ export class GroupProductService {
     });
   }
 
-  successMessageCreate() {
+  successMessageNew() {
     this.messageSnackBar('Grupo de produto criado com sucesso!');
   }
 
-  successMessageUpdate() {
+  successMessageEdit() {
     this.messageSnackBar('Grupo de produto alterado com sucesso!');
   }
 
   successMessageDelete() {
     this.messageSnackBar('Grupo de produto excluido com sucesso!');
-  }
-
-  successMessageUndefined() {
-    this.messageSnackBar('Procedimento executado com sucesso!');
   }
 }

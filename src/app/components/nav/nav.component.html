@@ -6,16 +6,16 @@
       fixedInViewport="true"
       fixedTopGap="40">
       <mat-nav-list class="nav-list">
-         <a mat-list-item routerLink="/">
+         <a mat-list-item [routerLink]="'/'">
             <i class="material-icons"> home </i>
             Início
          </a>
-         <a  mat-list-item routerLink="/product">
+         <a  mat-list-item [routerLink]="'product'">
             <i class="material-icons"> storefront </i>
             Produto
          </a>
-         <a  mat-list-item routerLink="/group-product">
-            <i class="material-icons"> work icon </i>
+         <a  mat-list-item [routerLink]="'group-product'">
+            <i class="material-icons"> work </i>
             Grupo de produtos
          </a>
       </mat-nav-list>

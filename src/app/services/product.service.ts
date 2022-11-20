@@ -16,7 +16,7 @@ export class ProductService {
     return this.http.post<Product>(this.baseUrl, product);
   }
 
-  update(product: Product): Observable<Product> {
+  edit(product: Product): Observable<Product> {
     const url = `${this.baseUrl}/${product.id}`;
     console.log(product.group);
     return this.http.put<Product>(url, product);
@@ -24,11 +24,6 @@ export class ProductService {
 
   getAll(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);
-  }
-
-  undefined(product: Product) {
-    const url = `${this.baseUrl}/${product.id}`;
-    return this.http.get<Product>(url);
   }
 
   readById(id: string): Observable<Product> {
@@ -49,19 +44,15 @@ export class ProductService {
     });
   }
 
-  successMessageCreate() {
+  successMessageNew() {
     this.messageSnackBar('Produto criado com sucesso!');
   }
 
-  successMessageUpdate() {
+  successMessageEdit() {
     this.messageSnackBar('Produto alterado com sucesso!');
   }
 
   successMessageDelete() {
     this.messageSnackBar('Produto excluido com sucesso!');
-  }
-
-  successMessageUndefined() {
-    this.messageSnackBar('Procedimento executado com sucesso!');
   }
 }

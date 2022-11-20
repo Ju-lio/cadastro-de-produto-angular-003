@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, Subject, takeUntil } from 'rxjs';
-import { State } from 'src/app/enums/state.enum';
+import { Action } from 'src/app/enums/action.enum';
 import { Button } from 'src/app/models/button.model';
 import { GroupProduct } from 'src/app/models/group-product.model';
 import { Input } from 'src/app/models/input.model';
 import { GroupProductService } from 'src/app/services/group-product.service';
 
 export type Operation = {
-  [key in State]: {
+  [key in Action]: {
     submit: (product: GroupProduct) => Observable<GroupProduct>;
     init: () => void;
     successMessage: () => void;
@@ -21,7 +21,7 @@ export type Operation = {
   styleUrls: ['./group-product-form.component.css'],
 })
 export class GroupProductFormComponent implements OnInit {
-  state!: State;
+  action!: Action;
   title!: string;
   destroy$: Subject<unknown> = new Subject();
 
@@ -50,24 +50,24 @@ export class GroupProductFormComponent implements OnInit {
   };
 
   readonly operation: Operation = {
-    [State.CREATE]: {
+    [Action.NEW]: {
       submit: (groupProduct: GroupProduct) =>
         this.groupProductsService.create(groupProduct),
-      init: () => this.initCreate(),
-      successMessage: () => this.groupProductsService.successMessageCreate(),
+      init: () => this.initNew(),
+      successMessage: () => this.groupProductsService.successMessageNew(),
     },
-    [State.UPDATE]: {
+    [Action.EDIT]: {
       submit: (groupProduct: GroupProduct) =>
-        this.groupProductsService.update(groupProduct),
-      init: () => this.initUpdate(),
-      successMessage: () => this.groupProductsService.successMessageUpdate(),
+        this.groupProductsService.edit(groupProduct),
+      init: () => this.initEdit(),
+      successMessage: () => this.groupProductsService.successMessageEdit(),
     },
-    [State.BROWSE]: {
+    [Action.VIEW]: {
       submit: (groupProduct: GroupProduct) => EMPTY,
-      init: () => this.initBrowse(),
+      init: () => this.initView(),
       successMessage: () => null,
     },
-    [State.DELETE]: {
+    [Action.DELETE]: {
       submit: (groupProduct: GroupProduct) =>
         this.groupProductsService.delete(groupProduct),
       init: () => this.initDelete(),
@@ -95,22 +95,26 @@ export class GroupProductFormComponent implements OnInit {
       });
   }
 
-  setState(state: State) {
-    this.state = state;
+  setAction(action: Action) {
+    this.action = action;
   }
 
-  initialize(state: string) {
-    const indexOfState = Object.values(State).indexOf(
-      state as unknown as State
+  getAction(action: string): Action {
+    const indexOfAction = Object.values(Action).indexOf(
+      action as unknown as Action
     );
-    const key = Object.keys(State)[indexOfState];
-    this.setState(key ? State[key as keyof typeof State] : State.CREATE);
-    this.operation[this.state].init();
+    const key = Object.keys(Action)[indexOfAction];
+    return key ? Action[key as keyof typeof Action] : Action.NEW;
+  }
+
+  initialize(action: string) {
+    this.setAction(this.getAction(action));
+    this.operation[this.action].init();
   }
 
   ngOnInit(): void {
-    const state = this.route.snapshot.paramMap.get('operation');
-    this.initialize(state ?? State.CREATE);
+    const action = this.route.snapshot.queryParamMap.get('action');
+    this.initialize(action ?? Action.NEW);
   }
 
   cancel() {
@@ -123,11 +127,11 @@ export class GroupProductFormComponent implements OnInit {
 
   submit() {
     this.disableAll(true);
-    this.operation[this.state]
+    this.operation[this.action]
       .submit(this.groupProduct)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.operation[this.state].successMessage();
+        this.operation[this.action].successMessage();
         this.disableAll(false);
         this.cancel();
       });
@@ -153,19 +157,18 @@ export class GroupProductFormComponent implements OnInit {
       });
   }
 
-  initCreate() {
+  initNew() {
     this.title = 'Novo grupo de produto';
     this.inputId.visible = false;
-    this.buttonCancel.caption = 'Limpar';
   }
 
-  initUpdate() {
+  initEdit() {
     this.title = 'Editar grupo de produto';
     this.inputId.disabled = true;
     this.setProduct(this.route.snapshot.paramMap.get('id') ?? '');
   }
 
-  initBrowse() {
+  initView() {
     this.title = 'Consultar grupo de produto';
     this.buttonConfirm.visible = false;
     this.buttonCancel = {

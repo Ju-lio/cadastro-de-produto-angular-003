@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
-import { State } from 'src/app/enums/state.enum';
 import { ProductService } from 'src/app/services/product.service';
 import { GroupProductService } from 'src/app/services/group-product.service';
 import { GroupProduct } from 'src/app/models/group-product.model';
 import { Subject, takeUntil } from 'rxjs';
+import { Action } from 'src/app/enums/action.enum';
 
 @Component({
   selector: 'app-product-list',
@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
   groupProductSelected?: number;
   displayedColumns = ['id', 'name', 'price', 'actions'];
   destroy$: Subject<unknown> = new Subject();
-  readonly state = State;
+  readonly action = Action;
 
   constructor(
     private productsService: ProductService,
